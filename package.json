@@ -1,0 +1,17 @@
+{
+  "name": "no-react",
+  "version": "1.0.0",
+  "main": "dist/no-react.js",
+  "scripts": {
+    "lint": "tslint lib/*.ts",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.0.0-beta.18",
+    "tslint": "^4.3.1",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  }
+}
