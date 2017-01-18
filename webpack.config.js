@@ -1,10 +1,13 @@
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './index.ts',
+  entry: {
+    "no-react": "./index.ts",
+    "no-react.min": "./index.ts",
+  },
   output: {
-    path: 'dist',
-    filename: 'no-react.js',
+    path: './dist',
+    filename: "[name].js",
     library: 'NoReact',
     libraryTarget: 'umd'
   },
@@ -19,6 +22,9 @@ module.exports = {
     }],
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    })
   ]
 };
