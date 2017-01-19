@@ -42,3 +42,21 @@ Or without JSX:
 
     NoReact.render(NoReact.createElement(App), document.body);
 
+### Component lifecycle
+
+There are several methods in the component lifecycle:
+
+    export class SomeComponent extends NoReact.Component {
+      
+      beforeRender() {}
+      
+      render(childContent) {}
+      
+      afterRender() {}
+      
+      
+      beforeDestroy() {}
+      
+      afterDestroy() {}
+      
+    }

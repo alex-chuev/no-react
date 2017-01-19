@@ -1,7 +1,7 @@
 {
   "name": "no-react",
   "description": "An extremely lightweight (3KB) alternative for ReactJS. Maximum of the native JavaScript.",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "keywords": [
     "jsx",
     "components",
