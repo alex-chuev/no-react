@@ -1,6 +1,6 @@
 # NoReact
 
-This is a simple library for building user interfaces with ReactJS approach and using JSX syntax.
+This is a simple and lightweight (3KB) library for building user interfaces with ReactJS approach and using JSX syntax.
 
 ### To install the library:
 
