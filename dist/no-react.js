@@ -180,7 +180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    ElementComponent.prototype.setAttributes = function () {
 	        var _this = this;
-	        Object.keys(this.properties)
+	        this.properties && Object.keys(this.properties)
 	            .forEach(function (key) { return _this.element[key] = _this.properties[key]; });
 	    };
 	    ElementComponent.prototype.renderContent = function (content) {
@@ -190,7 +190,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        else if (content instanceof BaseComponent_1.BaseComponent) {
 	            this.appendChildComponent(content);
 	        }
-	        else {
+	        else if (typeof content !== 'undefined') {
 	            this.element.appendChild(document.createTextNode(content));
 	        }
 	    };
