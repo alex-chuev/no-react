@@ -19,7 +19,7 @@ export class ElementComponent extends BaseComponent {
   }
 
   private setAttributes() {
-    Object.keys(this.properties)
+    this.properties && Object.keys(this.properties)
       .forEach(key => this.element[key] = this.properties[key]);
   }
 
@@ -28,7 +28,7 @@ export class ElementComponent extends BaseComponent {
       content.forEach(this.renderContent, this);
     } else if (content instanceof BaseComponent) {
       this.appendChildComponent(content);
-    } else {
+    } else if (typeof content !== 'undefined') {
       this.element.appendChild(document.createTextNode(content));
     }
   }
