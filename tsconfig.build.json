@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true
+  },
+  "include": [
+    "index.ts",
+    "jsx-runtime.ts",
+    "lib",
+    "interfaces"
+  ]
+}

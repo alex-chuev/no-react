@@ -1,11 +1,13 @@
 {
   "name": "no-react",
-  "description": "An extremely lightweight (3KB) alternative for ReactJS. Maximum of the native JavaScript.",
-  "version": "1.0.7",
+  "description": "An extremely lightweight alternative for ReactJS: JSX that creates real DOM, plus fine-grained signals. Maximum of the native JavaScript.",
+  "version": "2.0.0",
   "keywords": [
     "jsx",
     "components",
-    "react"
+    "react",
+    "signals",
+    "reactive"
   ],
   "repository": {
     "type": "git",
@@ -15,17 +17,44 @@
     "url": "https://github.com/alex-chuev/no-react/issues",
     "email": "alex@chuev.com"
   },
-  "main": "dist/no-react.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/no-react.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-runtime.d.ts",
+      "default": "./dist/jsx-runtime.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "lint": "tslint lib/*.ts",
-    "build": "webpack"
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && npm run build:esm && npm run build:global",
+    "build:esm": "esbuild index.ts jsx-runtime.ts --bundle --splitting --format=esm --outdir=dist",
+    "build:global": "esbuild index.ts --bundle --format=iife --global-name=NoReact --outfile=dist/no-react.js && esbuild index.ts --bundle --minify --format=iife --global-name=NoReact --outfile=dist/no-react.min.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "example": "esbuild examples/todo/main.tsx --bundle --tsconfig=examples/tsconfig.json --outdir=examples/todo/build --servedir=examples/todo",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
   },
   "author": "Alex Chuev <alex@chuev.com>",
   "license": "MIT",
   "devDependencies": {
-    "awesome-typescript-loader": "^3.0.0-beta.18",
-    "tslint": "^4.3.1",
-    "typescript": "^2.1.5",
-    "webpack": "^1.14.0"
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
   }
 }

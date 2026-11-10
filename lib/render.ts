@@ -1,6 +1,20 @@
 import { BaseComponent } from './BaseComponent';
 
-export function render(component: BaseComponent, element: Element|HTMLElement) {
+const mounted = new WeakMap<Element, BaseComponent>();
+
+/**
+ * Mounts `component` into `element`, destroying whatever was rendered there before.
+ */
+export function render<C extends BaseComponent>(component: C, element: Element | HTMLElement): C {
+  const previous = mounted.get(element);
+
+  if (previous && previous !== component) {
+    previous.destroy();
+  }
+
   element.innerHTML = '';
   element.appendChild(component.element);
+  mounted.set(element, component);
+
+  return component;
 }

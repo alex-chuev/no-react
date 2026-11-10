@@ -1,9 +1,5 @@
-import {Component} from './lib/Component';
-import {createElement} from './lib/createElement';
-import {render} from './lib/render';
+import * as NoReact from './lib/api';
 
-export {
-  Component,
-  createElement,
-  render,
-};
+export * from './lib/api';
+
+export default NoReact;

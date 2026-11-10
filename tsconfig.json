@@ -1,6 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "noImplicitUseStrict": true
-  }
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "noImplicitOverride": false,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "no-react",
+    "paths": {
+      "no-react": ["./index.ts"],
+      "no-react/jsx-runtime": ["./jsx-runtime.ts"],
+      "no-react/jsx-dev-runtime": ["./jsx-runtime.ts"]
+    },
+    "skipLibCheck": true
+  },
+  "include": ["index.ts", "jsx-runtime.ts", "lib", "interfaces", "test", "examples"]
 }

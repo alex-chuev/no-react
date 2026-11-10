@@ -1,19 +1,24 @@
 import { Properties } from '../interfaces/Properties';
 import { BaseComponent } from './BaseComponent';
+import { runInScope } from './reactive';
 
-export abstract class Component extends BaseComponent {
-  constructor(properties?: Properties, content?: any) {
-    super(properties);
-
-    this.renderComponent(content);
+export abstract class Component<P extends Properties = Properties> extends BaseComponent<P> {
+  constructor(properties?: P, public content: any[] = []) {
+    super(properties || {} as P);
   }
 
-  renderComponent(content: any) {
-    this.beforeRender();
+  /**
+   * Called by `createElement` once the instance is fully constructed,
+   * so class fields are already initialized when `render` runs.
+   */
+  renderComponent(content: any[] = this.content) {
+    runInScope(this, () => {
+      this.beforeRender();
 
-    this.appendChildComponent(this.render(content));
+      this.appendChildComponent(this.render(content));
 
-    this.afterRender();
+      this.afterRender();
+    });
   }
 
   beforeRender() {
@@ -22,7 +27,7 @@ export abstract class Component extends BaseComponent {
   afterRender() {
   }
 
-  abstract render(content?: any): BaseComponent;
+  abstract render(content: any[]): BaseComponent;
 
   appendChildComponent(child: BaseComponent) {
     this.element = child.element;
@@ -30,6 +35,10 @@ export abstract class Component extends BaseComponent {
   }
 
   destroy() {
+    if (this.destroyed) {
+      return;
+    }
+
     this.beforeDestroy();
     super.destroy();
     this.afterDestroy();
