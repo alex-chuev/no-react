@@ -157,9 +157,11 @@ There are several methods in the component lifecycle:
 
 `destroy()` removes the component's element, destroys its children and disposes all of its effects.
 
-### Example
+### Examples
 
-`examples/todo` contains a small todo app. Run it with `npm run example` and open the printed address.
+More than twenty runnable examples, from a counter to a todo app, a data table, a router and a web component, live in a separate repository: [no-react-example](https://github.com/alex-chuev/no-react-example) ([live demo](https://alex-chuev.github.io/no-react-example/)).
+
+`examples/todo` in this repository contains a small todo app. Run it with `npm run example` and open the printed address.
 
 ### Upgrading from 1.x
 
