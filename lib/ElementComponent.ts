@@ -58,8 +58,10 @@ export class ElementComponent extends BaseComponent {
     const {nodes, properties, content: renderer} = this.dependencies;
 
     this.element = nodes.element(this.elementName);
-    properties.bind(this.element, this.properties);
+    // Children go first: some properties depend on them, like the `value` of a <select>,
+    // which can only pick an option that already exists.
     renderer.append(this.element, this, content);
+    properties.bind(this.element, this.properties);
 
     // `ref` comes last, so it sees the element with its children appended.
     if (typeof this.properties.ref === 'function') {

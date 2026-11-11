@@ -47,6 +47,17 @@ describe('elements', () => {
     expect(view.element.tagName).toBe('UL');
   });
 
+  it('selects the option given by the value of a select', () => {
+    const view = (
+      <select value="b">
+        <option value="a">A</option>
+        <option value="b">B</option>
+      </select>
+    );
+
+    expect((view.element as HTMLSelectElement).value).toBe('b');
+  });
+
   it('accepts native DOM nodes as children', () => {
     const native = document.createElement('canvas');
     const view = <div>{native}</div>;
@@ -89,6 +100,24 @@ describe('reactivity', () => {
     active.set(true);
 
     expect(html(view)).toBe('<a class="on" data-state="active"></a>');
+  });
+
+  it('keeps the value of a select in sync with a signal', () => {
+    const choice = signal('b');
+    const view = (
+      <select value={choice}>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+      </select>
+    );
+    const select = view.element as HTMLSelectElement;
+
+    expect(select.value).toBe('b');
+
+    choice.set('c');
+
+    expect(select.value).toBe('c');
   });
 
   it('switches between elements', () => {

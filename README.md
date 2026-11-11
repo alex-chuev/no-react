@@ -133,6 +133,7 @@ The key defaults to the item itself. To change an item in place, keep signals in
 - `onClick`, `onInput`, ... (and the old lowercase `onclick`) attach event listeners.
 - `className` / `class`, `style` as a string or an object (`{color: 'red', 'margin-top': '2px'}`).
 - DOM properties (`value`, `checked`, `disabled`, ...) are set as properties, anything else (`data-*`, `aria-*`, ...) as attributes; `null` and `false` remove an attribute.
+- Properties are set after the children are appended, so `<select value="b">` selects its option. Setting `innerHTML` or `textContent` as a property therefore replaces the JSX children.
 - `ref={el => ...}` is called with the element once its children are appended.
 - SVG tags are created in the SVG namespace.
 
