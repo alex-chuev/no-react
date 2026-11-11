@@ -41,9 +41,10 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && npm run build:esm && npm run build:global",
-    "build:esm": "esbuild index.ts jsx-runtime.ts --bundle --splitting --format=esm --outdir=dist",
-    "build:global": "esbuild index.ts --bundle --format=iife --global-name=NoReact --outfile=dist/no-react.js && esbuild index.ts --bundle --minify --format=iife --global-name=NoReact --outfile=dist/no-react.min.js",
+    "build": "rm -rf dist .build && tsc -p tsconfig.build.json && tsc -p tsconfig.build.js.json && npm run build:esm && npm run build:global && rm -rf .build && npm run build:check",
+    "build:esm": "esbuild .build/index.js .build/jsx-runtime.js --bundle --splitting --format=esm --legal-comments=none --outdir=dist",
+    "build:global": "esbuild .build/index.js --bundle --format=iife --global-name=NoReact --legal-comments=none --outfile=dist/no-react.js && esbuild .build/index.js --bundle --minify --format=iife --global-name=NoReact --legal-comments=none --outfile=dist/no-react.min.js",
+    "build:check": "! grep -rlE --include=\"*.js\" \"/\\\\*\\\\*|^\\\\s*// [^.]\" dist || (echo \"Source comments leaked into the JavaScript in dist\" && exit 1)",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "example": "esbuild examples/todo/main.tsx --bundle --tsconfig=examples/tsconfig.json --outdir=examples/todo/build --servedir=examples/todo",

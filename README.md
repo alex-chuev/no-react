@@ -1,6 +1,6 @@
 # NoReact
 
-A tiny (~2.5KB gzipped) library for building user interfaces with the ReactJS approach and JSX syntax — but without a virtual DOM.
+A tiny (~3KB gzipped) library for building user interfaces with the ReactJS approach and JSX syntax — but without a virtual DOM.
 
 JSX in NoReact creates **real DOM elements**. There is no diffing and no re-rendering of whole components: when state changes, **signals** update exactly the text node or attribute that depends on them. Maximum of the native JavaScript.
 
@@ -9,7 +9,7 @@ JSX in NoReact creates **real DOM elements**. There is no diffing and no re-rend
 - **JSX gives you real DOM.** `<div/>` is an `HTMLDivElement`, so `element.animate()`, `focus()` or any DOM library work directly — no refs or escape hatches needed.
 - **No virtual DOM, no diffing, no re-renders.** A component renders once; a changed signal updates only what is bound to it.
 - **No special compiler.** It works with the standard JSX transform of TypeScript, esbuild, Vite and Babel.
-- **Tiny and dependency-free:** ~2.5KB gzipped, and the whole source is small enough to read in one sitting.
+- **Tiny and dependency-free:** ~3KB gzipped, and the whole source is small enough to read in one sitting.
 
 ### When to use it
 

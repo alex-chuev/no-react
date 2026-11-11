@@ -1,3 +1,6 @@
+/**
+ * The public API of the library. Everything else in `lib` is internal.
+ */
 export { BaseComponent } from './BaseComponent';
 export { Component } from './Component';
 export { createElement } from './createElement';
